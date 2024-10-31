@@ -15,9 +15,10 @@ order by employees.emp_no
 
 select last_name, first_name, hire_date
 from employees
-where hire_date between '01/01/1986' and '12/31/1986'
+where extract(year from hire_date)= 1986
 
 	-- OK 36150 rows
+
 
 
 -- 3) List the manager of each department along with their department number, department name, employee number, last name, and first name.
@@ -43,7 +44,21 @@ from employees
 		on dept_emp.dept_no  = departements.dept_no
 	on employees.emp_no  = dept_emp.emp_no
 
-	--  OK 331,603 rows because there are duplicates > some employees have been  in different departments
+	--  OK 331,603 rows (consistant with emp_dept table) because there are 31579 employees that have been in 2 different departments
+
+		-- count of multi-aaigned employees
+		select count(*) as multi_assignment
+		from  ( 
+			select *
+			from (
+				select emp_no, count(emp_no) as assignment
+				from dept_emp
+				group by emp_no 
+				order by assignment desc
+				) 
+			where assignment >1
+			);
+
 
 -- 5) List first name, last name, and sex of each employee whose first name is Hercules and whose last name begins with the letter B.
 
@@ -51,13 +66,14 @@ select  first_name , last_name, sex
 from employees
 where 
 	first_name = 'Hercules' 	and last_name like 'B%' 
-	;
+order by last_name
+;
 	
-	-- OK 20 rows
+	-- OK 20 rows  : baak, baer,... , buchter
 
 -- 6) List each employee in the Sales department, including their employee number, last name, and first name.
 
-select employees.emp_no , employees.last_name  , employees.first_name , dept_emp.dept_no , departements.dept_name
+select employees.emp_no , employees.last_name  , employees.first_name 
 
 from employees
 	join dept_emp
@@ -66,12 +82,13 @@ from employees
 	on employees.emp_no  = dept_emp.emp_no
 	
 where departements.dept_name = 'Sales'
+order by emp_no
 
 	-- OK rows = 52245
 
 -- 7) List each employee in the Sales and Development departments, including their employee number, last name, first name, and department name.
 
-select employees.emp_no , employees.last_name  , employees.first_name , dept_emp.dept_no , departements.dept_name
+select employees.emp_no , employees.last_name  , employees.first_name , departements.dept_name
 
 from employees
 	join dept_emp
@@ -80,6 +97,7 @@ from employees
 	on employees.emp_no  = dept_emp.emp_no
 	
 where departements.dept_name = 'Sales' or departements.dept_name = 'Development'
+order by emp_no
 
 	-- OK rows = 137952
 
@@ -91,4 +109,4 @@ from employees
 group by last_name
 order by frequency desc
 
-	-- OK 1638 rows : baba (226), gelosh(223), foolsday (1)
+	-- OK 1638 rows : baba (226), gelosh(223),..., sadowsky(145), foolsday (1)

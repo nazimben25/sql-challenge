@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS dept_manager CASCADE;
 		-- Create new table
 		
 		create table salaries (
-			emp_no int primary key ,
+			emp_no int not null primary key ,
 			salary DECIMAL
 			)	;
 			
@@ -30,7 +30,7 @@ DROP TABLE IF EXISTS dept_manager CASCADE;
 		-- Create new table
 		
 		create table titles (
-			title_id CHAR(5) PRIMARY KEY,
+			title_id CHAR(5) not null PRIMARY KEY,
 			title VARCHAR(20)  not null
 			)	;
 		select * from titles ;
@@ -43,7 +43,7 @@ DROP TABLE IF EXISTS dept_manager CASCADE;
 		-- Create new table
 		
 		create table employees (
-			emp_no int primary key ,
+			emp_no int not null primary key ,
 			emp_title_id char(5)  not null,
 			birth_date DATE,
 			first_name varchar(25)  not null,
@@ -63,7 +63,7 @@ DROP TABLE IF EXISTS dept_manager CASCADE;
 		-- Create new table
 		
 		create table departements (
-			dept_no CHAR(4) primary key,
+			dept_no CHAR(4) not null primary key,
 			dept_name varchar(25)  not null
 			)	;
 
@@ -76,7 +76,7 @@ DROP TABLE IF EXISTS dept_manager CASCADE;
 		--  Create new table
 		
 		create table dept_emp (
-			emp_no int  not null,
+			emp_no int not null  not null,
 			dept_no CHAR(4)  not null,
 			
 			PRIMARY KEY (emp_no, dept_no),
@@ -94,7 +94,7 @@ DROP TABLE IF EXISTS dept_manager CASCADE;
 		-- Create new table
 		
 		create table dept_manager (
-			dept_no CHAR(4)  not null,
+			dept_no CHAR(4) not null  not null,
 			emp_no int  not null,
 			
 			PRIMARY KEY (dept_no, emp_no),

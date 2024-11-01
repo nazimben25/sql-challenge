@@ -16,6 +16,7 @@ order by employees.emp_no
 select last_name, first_name, hire_date
 from employees
 where extract(year from hire_date)= 1986
+order by hire_date ;
 
 	-- OK 36150 rows
 
@@ -109,4 +110,4 @@ from employees
 group by last_name
 order by frequency desc
 
-	-- OK 1638 rows : baba (226), gelosh(223),..., sadowsky(145), foolsday (1)
+	-- OK 1638 rows : baba (226), corg(223), gelosh(223),..., sadowsky(145), foolsday (1)

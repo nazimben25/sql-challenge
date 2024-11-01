@@ -36,6 +36,10 @@ This is the output of Challenge 9 : SQL
   code for the 8 questions of the requirement
 
 
+3) import data
+date is available in csv files (6 files)
+directory : resources
+it needs to be imported manually
 
 
 

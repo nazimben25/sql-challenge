@@ -1,4 +1,10 @@
-# sql-challenge
+# Using SQL POSTGRES
+## Design SQL database tables to hold data from CSV files, 
+## import data from the CSV files into those tables
+## create entity relationship diagrams (ERDs)
+## Use querie
+
+### sql-challenge
 This is the output of Challenge 9 : SQL
 
 
